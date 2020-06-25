@@ -7,8 +7,10 @@ const { Client, MessageEmbed } = require('discord.js');
 
 client.on('ready', () => {
     console.log(`${client.user.tag} is ready`);
-    client.user.setActivity('Being a bot', { type: 'STREAMING' });
+    client.user.setActivity('Do info for all commands', { type: 'STREAMING' }); 
 });
+
+
 
 // The code below welcomes people when they join the server
 
@@ -30,7 +32,8 @@ client.on('guildMemberRemove', member => {
 
 client.on('message', async message => {
   if (message.content == config.prefix+"help") {
-    if(message.author.id !== message.guild.ownerID) return
+    if(message.author.id !== message.guild.ownerID)return;
+    
 
     const embed = new MessageEmbed()
       .setColor('PURPLE')
@@ -159,8 +162,6 @@ client.on('message', message => {
         // Successmessage
         message.channel.send(":wave: " + member.displayName + " has been successfully kicked :point_right: ");
     }).catch(() => {
-        // Failmessage
-        message.channel.send("Access Granted");
     });
 }
 });
@@ -184,6 +185,24 @@ client.on("message", (message) => {
   }
 });
 
+client.on('message', message => {
+  if (message.content === config.prefix+'info') {
+
+    const embed = new MessageEmbed()
+    .setColor('#c644bc')
+    .setTitle('commands for Lbot')
+    .addField("!help --- Show's you a list of commands to create a server only can use if owner")
+    .addField("!setup --- This command takes you to an embed that's show different type's of server's you can setup also only for owner")
+    .addField("!chillserver --- This command is for owner's only this create's a chill type of server for you channels roles etc ")
+    .addField("!kick --- Only people with administrator role can use this command")
+    .addField("!ban --- ban's user's only people with the administrator role can use this")
+    .setFooter("Lbot info above")
+    
+
+
+    message.channel.send(embed);
+  }
+});
 
 
 
