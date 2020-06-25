@@ -7,6 +7,7 @@ const { Client, MessageEmbed } = require('discord.js');
 
 client.on('ready', () => {
     console.log(`${client.user.tag} is ready`);
+    client.user.setActivity('Being a bot', { type: 'STREAMING' });
 });
 
 // The code below welcomes people when they join the server
