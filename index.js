@@ -7,7 +7,7 @@ const { Client, MessageEmbed } = require('discord.js');
 
 client.on('ready', () => {
     console.log(`${client.user.tag} is ready`);
-    client.user.setActivity('Do info for all commands', { type: 'STREAMING' }); 
+    client.user.setActivity('Do !info for all commands', { type: 'STREAMING' }); 
 });
 
 
