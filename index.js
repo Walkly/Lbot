@@ -241,4 +241,4 @@ client.on('message', message => {
 
 
 
-    client.login(config.token)
+client.login("NzIzMzI3MTQ1MDYwOTkxMTA3.XuwA5g.VlpsPsyAY5el6GQOTW8-_Mw8QdM")
